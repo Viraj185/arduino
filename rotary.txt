@@ -1,0 +1,21 @@
+#define interrupt1 2
+#define interrupt2 3
+volatile int change;
+int counter;
+int lastcounter;
+
+void setup() {
+  pinMode(interrupt1,INPUT_PULLUP);
+  pinMode(interrupt2,INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(interrupt1), blink, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(interrupt2), blink, CHANGE);
+  Serial.begin(9600);
+}
+
+void loop() {
+  Serial.println(change);
+}
+
+void blink() {
+  change=!change;
+}
